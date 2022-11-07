@@ -7,9 +7,10 @@ const UserSchema = new mongoose.Schema({
   },
   lastName: {
     type: String,
+    required: true,
   },
-  birthDay: {
-    type: Date,
+  birthday: {
+    type: String,
     required: true,
   },
   email: {
@@ -20,6 +21,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  _uuid: {
+    type: String,
+    required: true,
+  }
 });
 
 module.exports = mongoose.model("User", UserSchema);
