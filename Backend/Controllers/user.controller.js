@@ -53,7 +53,7 @@ exports.user_register = async (req, res) => {
 
 exports.sign_in = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password } = req.body.data;
     const user = await User.findOne({ email });
 
     if (!user) {
