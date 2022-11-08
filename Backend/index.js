@@ -1,11 +1,10 @@
-const express = require("express");
-const router = require("./Routes/users.route");
-const cors = require("cors");
+const express = require('express');
+const router = require('./Routes/users.route');
+const cors = require('cors');
 
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-
-const dotenv = require("dotenv");
+const dotenv = require('dotenv');
 dotenv.config();
 
 const PORT = 8000;
@@ -29,7 +28,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("Connected to MongoDB");
+    console.log('Connected to MongoDB');
   })
   .catch((err) => {
     console.log(err);
