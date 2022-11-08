@@ -118,3 +118,17 @@ exports.update_user = async (req, res) => {
     return res.status(500).send({ message: error.message });
   }
 };
+
+exports.delete_user = async (req, res) => {
+  try {
+    const deletedUser = await User.findOneAndDelete({
+      _uuid: req.params.userId,
+    });
+    return res.status(200).send({
+      message: 'OK',
+      data: { deletedUser },
+    });
+  } catch (error) {
+    return res.status(500).send({ message: error.message });
+  }
+};
