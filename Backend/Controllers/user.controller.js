@@ -1,10 +1,9 @@
 const User = require('../Models/user.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const signature = '../process.env.JWT_SECRET';
 const uuid = require('uuid');
-
 require('dotenv').config();
+const signature = process.env.JWT_SECRET;
 
 exports.user_register = async (req, res) => {
   try {
@@ -65,7 +64,7 @@ exports.sign_in = async (req, res) => {
     const passwordcompare = await bcrypt.compare(password, user.password);
 
     if (!passwordcompare) {
-      return res.status(400).send({ status: 'error', error: error.message });
+      return res.status(400).send('Password is incorrect!');
     }
 
     const data = {
@@ -73,7 +72,9 @@ exports.sign_in = async (req, res) => {
       email: user.email,
     };
 
-    const userToken = jwt.sign({ data }, signature);
+    const userToken = jwt.sign({ data }, signature, {
+      expiresIn: '1h',
+    });
     user.userToken = userToken;
 
     await user.save();
@@ -82,7 +83,6 @@ exports.sign_in = async (req, res) => {
       data: {
         email: user.email,
         userToken: user.userToken,
-        id: user._uuid,
       },
     });
   } catch (err) {
@@ -90,14 +90,31 @@ exports.sign_in = async (req, res) => {
   }
 };
 
-//test function, functionality will be added
 exports.get_user = async (req, res) => {
   try {
-    const users = await User.find();
-    return res.status(200).send(users);
+    const user = await User.findOne({ userToken: req.headers.usertoken });
+
+    return res.status(200).send(user);
   } catch (err) {
     return res.status(500).send({
       message: err.message,
     });
+  }
+};
+
+exports.update_user = async (req, res) => {
+  try {
+    console.log(req.params.userId);
+    const updatedUser = await User.findOneAndUpdate(
+      { _uuid: req.params.userId },
+      { $set: req.body },
+      { new: true }
+    );
+    return res.status(200).send({
+      message: 'OK',
+      data: { updatedUser },
+    });
+  } catch (error) {
+    return res.status(500).send({ message: error.message });
   }
 };
