@@ -7,10 +7,9 @@ const signature = process.env.JWT_SECRET;
 
 exports.user_register = async (req, res) => {
   try {
-    const { firstName, lastName, birthday, email, password } = req.body;
-
+    const { firstName, lastName, birthday, email, password } = req.body.data;
     if (!(firstName && lastName && birthday && email && password)) {
-      return res.status(400).send('all inputs required');
+      return res.status(400).send('All inputs required!');
     }
 
     const firstNameCheck = /^[a-zA-Z]+$/.test(firstName);
