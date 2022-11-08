@@ -34,7 +34,7 @@ export default {
     },
   }),
   methods: {
-    async handleSubmit(e) {
+    async handleSubmit() {
       try {
         console.log(this.user.firstName, this.user.password);
         await axios.post("http://localhost:8000/api/auth/sign-up", {
