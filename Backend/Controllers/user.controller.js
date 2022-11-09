@@ -82,6 +82,7 @@ exports.sign_in = async (req, res) => {
       data: {
         email: user.email,
         userToken: user.userToken,
+        id: user._uuid,
       },
     });
   } catch (err) {
@@ -103,10 +104,9 @@ exports.get_user = async (req, res) => {
 
 exports.update_user = async (req, res) => {
   try {
-    console.log(req.params.userId);
     const updatedUser = await User.findOneAndUpdate(
       { _uuid: req.params.userId },
-      { $set: req.body },
+      { $set: req.body.data },
       { new: true }
     );
     return res.status(200).send({

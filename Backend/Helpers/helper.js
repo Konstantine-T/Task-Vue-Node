@@ -3,7 +3,7 @@ require('dotenv').config();
 const signature = process.env.JWT_SECRET;
 
 exports.logged_in = async (req, res, next) => {
-  const userToken = req.headers.usertoken;
+  const userToken = req.headers.usertoken || req.body.headers.usertoken;
 
   try {
     if (!userToken) {
