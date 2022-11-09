@@ -7,29 +7,43 @@
       >Password <input type="password" v-model="user.password" /><br /><br />
     </label>
     <button type="submit" @click.prevent="handleLogin">Log in, mate</button>
+    <p>{{ userToken }}</p>
   </form>
 </template>
 <script>
-import axios from "axios";
+import axios from 'axios';
+import { mapActions, mapGetters } from 'vuex';
+import store from '../store/store';
+
 export default {
-  name: "Signin",
+  name: 'Signin',
   data: () => ({
     user: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
   }),
+  computed: {
+    email: () => {
+      return store.state.email;
+    },
+    userToken: () => {
+      return store.state.userToken;
+    },
+  },
   methods: {
+    ...mapActions(['setUserToken', 'setEmail']),
     async handleLogin() {
       try {
-        console.log(this.user.email, this.user.password);
-        const res = await axios.post("http://localhost:8000/api/auth/sign-in", {
+        const res = await axios.post('http://localhost:8000/api/auth/sign-in', {
           data: this.user,
         });
+        store.commit('setEmail', this.user.email);
+        store.commit('setUserToken', res.data.data.userToken);
       } catch (err) {
-        console.log(err.response.data);
+        console.log(err);
       } finally {
-        this.user.email = this.user.password = "";
+        this.user.email = this.user.password = '';
       }
     },
   },
