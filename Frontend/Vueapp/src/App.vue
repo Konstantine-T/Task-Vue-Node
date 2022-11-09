@@ -1,18 +1,20 @@
 <template>
   <div id="app">
-    <Signin />
+    <Profile />
   </div>
 </template>
 
 <script>
-import Signup from "./components/Signup.vue";
-import Signin from "./components/Signin.vue";
+import Signup from './components/Signup.vue';
+import Signin from './components/Signin.vue';
+import Profile from './components/Profile.vue';
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     Signup,
     Signin,
+    Profile,
   },
 };
 </script>

@@ -12,7 +12,7 @@
 </template>
 <script>
 import axios from 'axios';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 import store from '../store/store';
 
 export default {
