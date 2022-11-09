@@ -23,7 +23,6 @@ export default {
   methods: {
     async handleDelete() {
       try {
-        console.log(this.$router);
         await axios.delete(
           `http://localhost:8000/api/users/${store.state.id}`,
           {
@@ -32,7 +31,7 @@ export default {
             },
           }
         );
-        console.log('USER DELETED');
+        this.$router.push({ name: 'signin' });
       } catch (err) {
         console.log(err);
       }

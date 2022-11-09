@@ -7,11 +7,11 @@
       >Last Name <input type="text" v-model="user.lastName" /><br /><br />
     </label>
     <button type="submit" @click.prevent="handleUpdate">Update</button>
+    <button type="submit" @click.prevent="handleCancel">Cancel</button>
   </form>
 </template>
 <script>
 import axios from 'axios';
-import { mapActions } from 'vuex';
 import store from '../store/store';
 
 export default {
@@ -45,9 +45,15 @@ export default {
             data: this.user,
           }
         );
+        this.user.firstName = '';
+        this.user.lastName = '';
+        this.$router.push({ name: 'profile' });
       } catch (err) {
         console.log(err);
       }
+    },
+    handleCancel() {
+      this.$router.push({ name: 'profile' });
     },
   },
 };

@@ -8,6 +8,8 @@
       <td align="center"><b>Birthday</b></td>
       <td align="center"><b>Email</b></td>
     </tr>
+    <button type="submit" @click.prevent="handleEdit">Edit User</button>
+    <button type="submit" @click.prevent="handleDelete">Delete User</button>
     <tr>
       <td align="center">
         <div>{{ user.firstName }}</div>
@@ -61,6 +63,12 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    },
+    handleEdit() {
+      this.$router.push({ name: 'edit' });
+    },
+    handleDelete() {
+      this.$router.push({ name: 'delete' });
     },
   },
 };

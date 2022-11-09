@@ -42,7 +42,9 @@ export default {
         });
         store.commit('setEmail', this.user.email);
         store.commit('setUserToken', res.data.data.userToken);
-        store.commit('setId', res.data.data._uuid);
+        store.commit('setId', res.data.data.id);
+        this.$router.push({ name: 'profile' });
+        console.log(store.state);
       } catch (err) {
         console.log(err);
       } finally {
