@@ -7,7 +7,6 @@
       >Password <input type="password" v-model="user.password" /><br /><br />
     </label>
     <button type="submit" @click.prevent="handleLogin">Log in, mate</button>
-    <p>{{ userToken }}</p>
   </form>
 </template>
 <script>
