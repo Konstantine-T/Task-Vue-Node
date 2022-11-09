@@ -6,7 +6,8 @@ Vue.use(Vuex);
 const setDefaultState = () => ({
   email: 'araaaaaaaaaaaaaaa',
   userToken:
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiMWZiNjMwNDMtNzkyYS00ODFhLWIwMTMtZGYwZTBhNWMwZjRjIiwiZW1haWwiOiJ0ZXN0ZnJvbnQxQG5ld2FnZS5pbyJ9LCJpYXQiOjE2Njc5OTk4MzcsImV4cCI6MTY2ODAwMzQzN30.KND-xIMigmUNqk1SQuHjG2TH3mR2_hTQogvuV-ISsOk',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiMWZiNjMwNDMtNzkyYS00ODFhLWIwMTMtZGYwZTBhNWMwZjRjIiwiZW1haWwiOiJ0ZXN0ZnJvbnQxQG5ld2FnZS5pbyJ9LCJpYXQiOjE2NjgwMDk2ODUsImV4cCI6MTY2ODAxMzI4NX0.WzaxmK7J-A8RveysBgNb_g_9wlFpxgIaV4sdN_PTwfE',
+  id: '1fb63043-792a-481a-b013-df0e0a5c0f4c',
 });
 
 const store = new Vuex.Store({
@@ -14,6 +15,7 @@ const store = new Vuex.Store({
   getters: {
     getEmail: state => state.email,
     getUserToken: state => state.userToken,
+    getId: state => state.id,
   },
   mutations: {
     setEmail: (state, email) => {
@@ -22,6 +24,9 @@ const store = new Vuex.Store({
     setUserToken: (state, token) => {
       state.userToken = token;
     },
+    setId: (state, id) => {
+      state.id = id;
+    },
   },
   actions: {
     setEmail: ({ commit }, email) => {
@@ -29,6 +34,9 @@ const store = new Vuex.Store({
     },
     setUserToken: ({ commit }, token) => {
       commit('setUserToken', token);
+    },
+    setId: ({ commit }, id) => {
+      commit('setId', id);
     },
   },
 });

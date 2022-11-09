@@ -49,7 +49,6 @@ export default {
   methods: {
     async fetchData() {
       try {
-        console.log(this.userToken, 'asasdasdasdasd');
         const res = await axios.get('http://localhost:8000/api/auth/me', {
           headers: {
             usertoken: this.userToken,

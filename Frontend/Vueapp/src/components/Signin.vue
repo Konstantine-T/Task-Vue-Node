@@ -30,9 +30,12 @@ export default {
     userToken: () => {
       return store.state.userToken;
     },
+    id: () => {
+      return store.state.id;
+    },
   },
   methods: {
-    ...mapActions(['setUserToken', 'setEmail']),
+    ...mapActions(['setUserToken', 'setEmail', 'setId']),
     async handleLogin() {
       try {
         const res = await axios.post('http://localhost:8000/api/auth/sign-in', {
@@ -40,6 +43,7 @@ export default {
         });
         store.commit('setEmail', this.user.email);
         store.commit('setUserToken', res.data.data.userToken);
+        store.commit('setId', res.data.data._uuid);
       } catch (err) {
         console.log(err);
       } finally {
