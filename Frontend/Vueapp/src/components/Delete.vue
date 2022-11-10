@@ -1,6 +1,7 @@
 <template>
   <form>
     <button type="submit" @click.prevent="handleDelete">DELETE USER!</button>
+    <p class="error" v-if="error">{{ errorMessage }}</p>
   </form>
 </template>
 <script>
@@ -9,6 +10,10 @@ import store from '../store/store';
 
 export default {
   name: 'Delete',
+  data: () => ({
+    error: false,
+    errorMessage: '',
+  }),
   mounted() {
     if (!store.state.userToken) {
       this.$router.push({ name: 'signup' });
@@ -36,9 +41,11 @@ export default {
             },
           }
         );
+        this.error = false;
         this.$router.push({ name: 'signin' });
       } catch (err) {
-        console.log(err);
+        this.error = true;
+        this.errorMessage = err.response.data;
       }
     },
   },

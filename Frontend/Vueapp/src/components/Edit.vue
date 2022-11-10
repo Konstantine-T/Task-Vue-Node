@@ -7,6 +7,7 @@
       <label for="lName"
         >Last Name <input type="text" v-model="user.lastName" /><br /><br />
       </label>
+      <p class="error" v-if="error">{{ errorMessage }}</p>
       <button class="editBtn" type="submit" @click.prevent="handleUpdate">
         Update
       </button>
@@ -27,6 +28,8 @@ export default {
       firstName: '',
       lastName: '',
     },
+    error: false,
+    errorMessage: '',
   }),
   mounted() {
     if (!store.state.userToken) {
@@ -58,9 +61,11 @@ export default {
         );
         this.user.firstName = '';
         this.user.lastName = '';
+        this.error = false;
         this.$router.push({ name: 'profile' });
       } catch (err) {
-        console.log(err);
+        this.error = true;
+        this.errorMessage = err.response.data;
       }
     },
     handleCancel() {

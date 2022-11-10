@@ -7,6 +7,7 @@
       <label for="password"
         >Password <input type="password" v-model="user.password" /><br /><br />
       </label>
+      <p class="error" v-if="error">{{ errorMessage }}</p>
       <button type="submit" @click.prevent="handleLogin">Log in, mate</button>
     </form>
   </div>
@@ -23,6 +24,8 @@ export default {
       email: '',
       password: '',
     },
+    error: false,
+    errorMessage: '',
   }),
   computed: {
     email: () => {
@@ -45,10 +48,11 @@ export default {
         store.commit('setEmail', this.user.email);
         store.commit('setUserToken', res.data.data.userToken);
         store.commit('setId', res.data.data.id);
+        this.error = false;
         this.$router.push({ name: 'profile' });
-        console.log(store.state);
       } catch (err) {
-        console.log(err);
+        this.error = true;
+        this.errorMessage = err.response.data;
       } finally {
         this.user.email = this.user.password = '';
       }

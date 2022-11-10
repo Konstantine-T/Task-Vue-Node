@@ -16,6 +16,7 @@
     <button class="profileBtn" type="submit" @click.prevent="handleDelete">
       Delete User
     </button>
+    <p class="error" v-if="error">{{ errorMessage }}</p>
   </div>
 </template>
 <script>
@@ -31,6 +32,8 @@ export default {
       birthday: '',
       email: '',
     },
+    error: false,
+    errorMessage: '',
   }),
   mounted() {
     if (!store.state.userToken) {
@@ -58,7 +61,8 @@ export default {
         this.user.birthday = res.data.birthday;
         this.user.email = res.data.email;
       } catch (err) {
-        console.log(err);
+        this.error = true;
+        this.errorMessage = err.response.data;
       }
     },
     handleEdit() {

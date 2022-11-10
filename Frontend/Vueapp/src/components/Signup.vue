@@ -18,6 +18,7 @@
       <label for="password"
         >Password <input type="password" v-model="user.password" /><br /><br />
       </label>
+      <p class="error" v-if="error">{{ errorMessage }}</p>
       <button type="submit" @click.prevent="handleSubmit">Register</button>
       <p>
         Already have an account? <span @click="handleSignin">Sign in</span>.
@@ -37,6 +38,8 @@ export default {
       email: '',
       password: '',
     },
+    error: false,
+    errorMessage: '',
   }),
   methods: {
     async handleSubmit() {
@@ -45,9 +48,11 @@ export default {
         await axios.post('http://localhost:8000/api/auth/sign-up', {
           data: this.user,
         });
+        this.error = false;
         this.$router.push({ name: 'signin' });
       } catch (err) {
-        console.log(err.response.data);
+        this.error = true;
+        this.errorMessage = err.response.data;
       } finally {
         this.user.firstName =
           this.user.lastName =
@@ -72,5 +77,8 @@ export default {
 span {
   color: blue;
   text-decoration: underline;
+}
+.error {
+  color: red;
 }
 </style>
