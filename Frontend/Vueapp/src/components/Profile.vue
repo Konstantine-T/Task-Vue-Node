@@ -7,7 +7,7 @@
       <li>First Name: {{ user.firstName }}</li>
       <li>Last Name: {{ user.lastName }}</li>
       <li>Birthday: {{ user.birthday }}</li>
-      <li>Password: {{ user.password }}</li>
+      <li>Email: {{ user.email }}</li>
     </ul>
     <button class="profileBtn" type="submit" @click.prevent="handleEdit">
       Edit User
