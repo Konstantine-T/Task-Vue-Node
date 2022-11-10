@@ -41,6 +41,9 @@ export default {
             },
           }
         );
+        store.commit('setEmail', '');
+        store.commit('setUserToken', '');
+        store.commit('setId', '');
         this.error = false;
         this.$router.push({ name: 'signin' });
       } catch (err) {
