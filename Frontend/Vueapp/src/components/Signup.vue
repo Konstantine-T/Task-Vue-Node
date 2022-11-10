@@ -10,7 +10,12 @@
       </label>
 
       <label for="birthday"
-        >Birthday <input type="text" v-model="user.birthday" /><br /><br />
+        >Birthday (dd-mm-yyyy)
+        <input
+          type="text"
+          v-mask="`##-##-####`"
+          v-model="user.birthday"
+        /><br /><br />
       </label>
       <label for="email"
         >Email <input type="text" v-model="user.email" /><br /><br />
@@ -28,6 +33,9 @@
 </template>
 <script>
 import axios from 'axios';
+import Vue from 'vue';
+import VueMask from 'v-mask';
+Vue.use(VueMask);
 export default {
   name: 'Signup',
   data: () => ({
