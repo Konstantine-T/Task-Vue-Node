@@ -91,4 +91,7 @@ export default {
   position: flex;
   margin-top: 5px;
 }
+.error {
+  color: red;
+}
 </style>

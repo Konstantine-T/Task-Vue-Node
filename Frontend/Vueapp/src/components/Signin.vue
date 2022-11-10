@@ -9,6 +9,9 @@
       </label>
       <p class="error" v-if="error">{{ errorMessage }}</p>
       <button type="submit" @click.prevent="handleLogin">Log in, mate</button>
+      <p>
+        Doesn't have an account? <span @click="handleSignup">Sign up</span>.
+      </p>
     </form>
   </div>
 </template>
@@ -57,6 +60,9 @@ export default {
         this.user.email = this.user.password = '';
       }
     },
+    handleSignup() {
+      this.$router.push({ name: 'signup' });
+    },
   },
 };
 </script>
@@ -65,5 +71,12 @@ export default {
   display: flex;
   justify-content: center;
   align-content: center;
+}
+span {
+  color: blue;
+  text-decoration: underline;
+}
+.error {
+  color: red;
 }
 </style>

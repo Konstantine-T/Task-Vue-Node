@@ -83,4 +83,7 @@ export default {
 .editBtn {
   margin-top: 5px;
 }
+.error {
+  color: red;
+}
 </style>
