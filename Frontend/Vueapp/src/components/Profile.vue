@@ -1,29 +1,21 @@
 <template>
-  <div>
-    <button type="submit" @click.prevent="fetchData">Fetch user data</button>
-
-    <tr style="background-color: #8fbc8f">
-      <td align="center"><b>Fast Name</b></td>
-      <td align="center"><b>Last Name</b></td>
-      <td align="center"><b>Birthday</b></td>
-      <td align="center"><b>Email</b></td>
-    </tr>
-    <button type="submit" @click.prevent="handleEdit">Edit User</button>
-    <button type="submit" @click.prevent="handleDelete">Delete User</button>
-    <tr>
-      <td align="center">
-        <div>{{ user.firstName }}</div>
-      </td>
-      <td align="center">
-        <div>{{ user.lastName }}</div>
-      </td>
-      <td align="center">
-        <div>{{ user.birthday }}</div>
-      </td>
-      <td align="center">
-        <div>{{ user.email }}</div>
-      </td>
-    </tr>
+  <div class="data">
+    <button class="profileBtn" type="submit" @click.prevent="fetchData">
+      Fetch user data
+    </button>
+    <ul>
+      <li>First Name: {{ user.firstName }}</li>
+      <li>Last Name: {{ user.lastName }}</li>
+      <li>Birthday: {{ user.birthday }}</li>
+      <li>Password: {{ user.password }}</li>
+    </ul>
+    <button class="profileBtn" type="submit" @click.prevent="handleEdit">
+      Edit User
+    </button>
+    <br />
+    <button class="profileBtn" type="submit" @click.prevent="handleDelete">
+      Delete User
+    </button>
   </div>
 </template>
 <script>
@@ -40,6 +32,11 @@ export default {
       email: '',
     },
   }),
+  mounted() {
+    if (!store.state.userToken) {
+      this.$router.push({ name: 'signup' });
+    }
+  },
   computed: {
     email: () => {
       return store.state.email;
@@ -73,3 +70,21 @@ export default {
   },
 };
 </script>
+<style>
+.data {
+  margin: auto;
+  width: 70%;
+  background-color: rgb(136, 130, 127);
+  padding: 10px;
+  display: table-cell;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  border-radius: 5px;
+}
+.profileBtn {
+  align-content: center;
+  position: flex;
+  margin-top: 5px;
+}
+</style>

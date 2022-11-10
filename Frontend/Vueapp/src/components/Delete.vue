@@ -9,6 +9,11 @@ import store from '../store/store';
 
 export default {
   name: 'Delete',
+  mounted() {
+    if (!store.state.userToken) {
+      this.$router.push({ name: 'signup' });
+    }
+  },
   computed: {
     email: () => {
       return store.state.email;

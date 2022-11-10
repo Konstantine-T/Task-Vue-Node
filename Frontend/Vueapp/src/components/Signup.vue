@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <form>
+  <div class="container">
+    <form class="form">
       <label for="fname"
         >First name <input type="text" v-model="user.firstName" /><br /><br
       /></label>
@@ -19,8 +19,10 @@
         >Password <input type="password" v-model="user.password" /><br /><br />
       </label>
       <button type="submit" @click.prevent="handleSubmit">Register</button>
+      <p>
+        Already have an account? <span @click="handleSignin">Sign in</span>.
+      </p>
     </form>
-    <p>Already have an account? <span @click="handleSignin">Sign in</span>.</p>
   </div>
 </template>
 <script>
@@ -61,3 +63,14 @@ export default {
   },
 };
 </script>
+<style>
+.container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+span {
+  color: blue;
+  text-decoration: underline;
+}
+</style>

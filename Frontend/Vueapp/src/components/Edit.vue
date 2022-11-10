@@ -1,14 +1,20 @@
 <template>
-  <form>
-    <label for="fName"
-      >First Name <input type="text" v-model="user.firstName" /><br /><br />
-    </label>
-    <label for="lName"
-      >Last Name <input type="text" v-model="user.lastName" /><br /><br />
-    </label>
-    <button type="submit" @click.prevent="handleUpdate">Update</button>
-    <button type="submit" @click.prevent="handleCancel">Cancel</button>
-  </form>
+  <div class="container">
+    <form>
+      <label for="fName"
+        >First Name <input type="text" v-model="user.firstName" /><br /><br />
+      </label>
+      <label for="lName"
+        >Last Name <input type="text" v-model="user.lastName" /><br /><br />
+      </label>
+      <button class="editBtn" type="submit" @click.prevent="handleUpdate">
+        Update
+      </button>
+      <button class="editBtn" type="submit" @click.prevent="handleCancel">
+        Cancel
+      </button>
+    </form>
+  </div>
 </template>
 <script>
 import axios from 'axios';
@@ -22,6 +28,11 @@ export default {
       lastName: '',
     },
   }),
+  mounted() {
+    if (!store.state.userToken) {
+      this.$router.push({ name: 'signup' });
+    }
+  },
   computed: {
     email: () => {
       return store.state.email;
@@ -58,3 +69,13 @@ export default {
   },
 };
 </script>
+<style>
+.container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.editBtn {
+  margin-top: 5px;
+}
+</style>
